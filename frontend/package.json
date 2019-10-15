@@ -14,9 +14,12 @@
   },
   "dependencies": {
     "gatsby": "^2.16.1",
+    "gatsby-i18n": "^1.1.7",
     "gatsby-plugin-typescript": "^2.1.15",
+    "i18next": "^17.2.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
+    "react-i18next": "^10.13.1",
     "react-redux": "^7.1.1",
     "redux": "^4.0.4"
   },
