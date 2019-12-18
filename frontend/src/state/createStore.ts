@@ -1,7 +1,7 @@
-import { createStore as reduxCreateStore } from "redux"
-import { GlobalState } from "../types/types"
+import { createStore as reduxCreateStore, combineReducers } from "redux"
+import i18nReducer from "./i18nReducer"
 
-const reducer = (state: GlobalState) => state
+const reducer = combineReducers({ i18nReducer })
 
 const createStore = () => reduxCreateStore(reducer)
 export default createStore

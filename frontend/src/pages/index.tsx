@@ -1,14 +1,36 @@
 import React from "react"
 import withI18next from "../components/withI18next"
-import { Helmet } from "react-helmet"
+import Header from "../components/Header"
+import { Dispatch } from "redux"
+import { TFunction, i18n } from "i18next"
+import { i18nAction } from "../state/i18nReducer"
+import { connect } from "react-redux"
+import { WithTranslation } from "react-i18next"
+import App from "../components/App"
 
-export default withI18next({ ns: "common" })(({ t }) => (
-  <>
-    <Helmet
-      defer={false}
-      defaultTitle={t("title")}
-      titleTemplate={`%s | ${t("title")}`}
-    ></Helmet>
-    <div>{t("greeting")}</div>
-  </>
-))
+const mapStateToProps = () => ({})
+
+type ConnectedProps = {
+  setLang: (t: TFunction, i18n: i18n, tReady: boolean) => i18nAction
+} & WithTranslation
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  setLang: (t: TFunction, i18n: i18n, tReady: boolean) =>
+    dispatch<i18nAction>({ type: "SET_TRANSLATION", t, i18n, tReady }),
+})
+
+export default withI18next({ ns: "common" })(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(({ setLang, t, tReady, i18n }: ConnectedProps) => {
+    setLang(t, i18n, tReady)
+
+    return (
+      <>
+        <Header />
+        <App />
+      </>
+    )
+  })
+)

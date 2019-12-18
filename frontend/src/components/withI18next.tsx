@@ -4,14 +4,16 @@ import { I18nextProvider, Translation, WithTranslation } from "react-i18next"
 import setupI18next from "../i18n"
 import { i18n as realI18n } from "i18next"
 
-const lngFormat = (locale: any) =>
+const lngFormat = (locale: string) =>
   locale.replace(/-[a-z]{2}$/, (e: string) => e.toUpperCase())
 
 type Withi18nextProps = {
-  pageContext: any
+  pageContext: { locale: string }
 }
 
-const withI18next = (options = {}) => (Comp: ElementType<WithTranslation>) => {
+const withI18next = (options = {}) => (
+  Comp: ElementType<WithTranslation & { locale: string }>
+) => {
   class I18nHOC extends Component<Withi18nextProps, any> {
     private i18n: realI18n
     constructor(props: any) {
@@ -58,7 +60,14 @@ const withI18next = (options = {}) => (Comp: ElementType<WithTranslation>) => {
         <I18nextProvider i18n={this.i18n}>
           <I18nProvider {...this.props.pageContext}>
             <Translation>
-              {t => <Comp t={t} i18n={this.i18n} tReady={true} />}
+              {t => (
+                <Comp
+                  t={t}
+                  i18n={this.i18n}
+                  tReady={true}
+                  locale={this.props.pageContext.locale}
+                />
+              )}
             </Translation>
           </I18nProvider>
         </I18nextProvider>
