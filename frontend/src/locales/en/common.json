@@ -1,4 +1,6 @@
 {
   "greeting": "hello",
-  "title": "Snowday Predictor"
+  "title": "Snowday Predictor",
+  "github": "GitHub",
+  "pageTitle": "Snowday Predictor"
 }

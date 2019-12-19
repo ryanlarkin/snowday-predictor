@@ -8,6 +8,17 @@ import TitleBar from "../TitleBar"
 import UserInput from "../UserInput"
 import Loading from "../Loading"
 import Results from "../Results"
+import styled from "styled-components"
+import "bootstrap/dist/css/bootstrap.min.css"
+
+const AppStyles = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #012a36;
+`
 
 type ConnectedApp = {
   t: TFunction
@@ -18,11 +29,10 @@ const mapStateToProps = (props: GlobalState) => ({
 })
 
 export default connect(mapStateToProps)(({ t }: ConnectedApp) => (
-  <>
-    <h1>{t("greeting")}</h1>
+  <AppStyles>
     <TitleBar />
     <UserInput />
     <Loading />
     <Results />
-  </>
+  </AppStyles>
 ))

@@ -1,4 +1,6 @@
 {
   "greeting": "bonjour",
-  "title": "Predictor de Snowdays"
+  "title": "Predictor de Snowdays",
+  "github": "GitHub",
+  "pageTitle": "Snowday Predictor"
 }
