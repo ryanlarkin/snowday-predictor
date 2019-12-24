@@ -1,6 +1,9 @@
 {
-  "greeting": "bonjour",
   "title": "Predictor de Snowdays",
   "github": "GitHub",
-  "pageTitle": "Snowday Predictor"
+  "pageTitle": "Snowday Predictor",
+  "inputLabel": "Enter your zip or postal code here:",
+  "inputInvalid": "Invalid zip/postal code",
+  "submitButton": "Predict",
+  "inputPlaceholder": "e.g. 02139 or N2L 3G1"
 }
