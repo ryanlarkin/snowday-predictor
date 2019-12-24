@@ -29,6 +29,7 @@
     "jest",
     "src/setupTests.ts",
     "gatsby-*.js",
-    "wrap-with-provider.js"
+    "wrap-with-provider.js",
+    "public"
   ]
 }
