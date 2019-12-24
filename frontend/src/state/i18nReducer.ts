@@ -4,5 +4,8 @@ export type i18nAction = {
   type: "SET_TRANSLATION"
 } & WithTranslation
 
-export default (state: WithTranslation | null, { t, i18n }: i18nAction) =>
-  Object.assign({}, state, { t, i18n })
+export default (
+  state: WithTranslation | null = null,
+  { t, i18n, type }: i18nAction
+) =>
+  type === "SET_TRANSLATION" ? Object.assign({}, state, { t, i18n }) : state

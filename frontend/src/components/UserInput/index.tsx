@@ -8,6 +8,8 @@ import { Form, Button, Col } from "react-bootstrap"
 import { Formik } from "formik"
 import { string, object } from "yup"
 import styled from "styled-components"
+import { UserInputAction } from "src/state/userInputReducer"
+import { Dispatch } from "redux"
 
 const schema = object({
   postalCode: string()
@@ -19,10 +21,16 @@ const schema = object({
 
 type ConnectedUserInput = {
   t: TFunction
+  setCode: (code: string) => UserInputAction
 }
 
 const mapStateToProps = (props: GlobalState) => ({
   t: props.i18nReducer.t,
+})
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  setCode: (code: string) =>
+    dispatch<UserInputAction>({ type: "SET_POSTALCODE", code }),
 })
 
 const StyledUserInput = styled.div`
@@ -55,11 +63,16 @@ const StyledUserInput = styled.div`
   }
 `
 
-export default connect(mapStateToProps)(({ t }: ConnectedUserInput) => (
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(({ t, setCode }: ConnectedUserInput) => (
   <StyledUserInput>
     <Formik
       validationSchema={schema}
-      onSubmit={console.log}
+      onSubmit={({ postalCode }) => {
+        setCode(postalCode)
+      }}
       initialValues={{
         postalCode: "",
       }}
