@@ -1,0 +1,12 @@
+{
+	"name": "hello-world-lambda",
+	"scripts": {
+		"build": "tsc",
+		"deploy": "npm run build && sls deploy"
+	},
+	"dependencies": {
+		"@types/aws-lambda": "^8.10.39",
+		"@types/node": "^13.1.0",
+		"typescript": "^3.7.4"
+	}
+}
