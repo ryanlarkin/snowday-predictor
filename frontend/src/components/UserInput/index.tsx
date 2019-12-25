@@ -25,7 +25,7 @@ type ConnectedUserInput = {
 }
 
 const mapStateToProps = (props: GlobalState) => ({
-  t: props.i18nReducer.t,
+  t: props.t,
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

@@ -12,8 +12,8 @@ type ConnectedLoading = {
 }
 
 const mapStateToProps = (props: GlobalState) => ({
-  t: props.i18nReducer.t,
-  loading: props.UserInputReducer.loading,
+  t: props.t,
+  loading: props.loading,
 })
 
 export default connect(mapStateToProps)(({ t, loading }: ConnectedLoading) =>

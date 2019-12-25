@@ -1,8 +1,53 @@
-import { createStore as reduxCreateStore, combineReducers } from "redux"
+import {
+  createStore as reduxCreateStore,
+  Middleware,
+  MiddlewareAPI,
+  Dispatch,
+  AnyAction,
+  applyMiddleware,
+} from "redux"
 import i18nReducer from "./i18nReducer"
 import UserInputReducer from "./userInputReducer"
+import reduceReducers from "reduce-reducers"
+import ErrorReducer from "./errorReducer"
 
-const reducer = combineReducers({ i18nReducer, UserInputReducer })
+const asyncDispatchMiddleware: Middleware<Dispatch> = ({
+  dispatch,
+}: MiddlewareAPI) => next => (action: AnyAction) => {
+  let syncActivityFinished = false
+  let actionQueue: AnyAction[] = []
 
-const createStore = () => reduxCreateStore(reducer)
+  function flushQueue() {
+    actionQueue.forEach(a => dispatch(a)) // flush queue
+    actionQueue = []
+  }
+
+  function asyncDispatch(asyncAction: AnyAction) {
+    actionQueue = actionQueue.concat([asyncAction])
+
+    if (syncActivityFinished) {
+      flushQueue()
+    }
+  }
+
+  const actionWithAsyncDispatch = Object.assign({}, action, { asyncDispatch })
+
+  next(actionWithAsyncDispatch)
+  syncActivityFinished = true
+  flushQueue()
+}
+
+const reducer = reduceReducers(
+  {
+    code: null,
+    loading: false,
+    error: null,
+  },
+  i18nReducer,
+  UserInputReducer,
+  ErrorReducer
+)
+
+const createStore = () =>
+  reduxCreateStore(reducer, applyMiddleware(asyncDispatchMiddleware))
 export default createStore

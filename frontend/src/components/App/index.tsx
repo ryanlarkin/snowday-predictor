@@ -25,7 +25,7 @@ type ConnectedApp = {
 }
 
 const mapStateToProps = (props: GlobalState) => ({
-  t: props.i18nReducer.t,
+  t: props.t,
 })
 
 export default connect(mapStateToProps)(({ t }: ConnectedApp) => (

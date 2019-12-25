@@ -7,11 +7,9 @@ const StyledLoader = styled(Loader)`
   justify-content: center;
 
   svg {
-    width: 5rem !important;
-    height: 5rem !important;
+    width: 5rem;
+    height: 5rem;
   }
 `
 
-export default () => (
-  <StyledLoader type="Bars" color="#C4C4C4" height={80} width={80} />
-)
+export default () => <StyledLoader type="Bars" color="#C4C4C4" />
