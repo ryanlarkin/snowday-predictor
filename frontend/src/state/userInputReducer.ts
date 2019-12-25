@@ -20,6 +20,11 @@ type WithAsyncDispatch = UserInputAction & {
 export type UserInputReducerState = {
   code: string | null
   loading: boolean
+  error: {
+    errorKey: string
+    errorValues: string[]
+  } | null
+  chance: number | null
 }
 
 export default (
@@ -68,7 +73,10 @@ export default (
             })
           } else {
             const data = decoded.right.data.prediction.data
-            console.log(data)
+            asyncDispatch({
+              type: "SET_RESULT",
+              ...data,
+            })
           }
         } else {
           console.error(decoded.left)
@@ -91,7 +99,13 @@ export default (
         })
       })
 
-    return Object.assign({}, state, { code, loading: true })
+    return Object.assign({}, state, {
+      code,
+      error: null,
+      loading: true,
+      chance: null,
+      location: null,
+    })
   } else {
     return state
   }

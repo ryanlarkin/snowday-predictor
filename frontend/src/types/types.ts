@@ -4,10 +4,14 @@ import { WithTranslation } from "react-i18next"
 import { UserInputReducerState } from "src/state/userInputReducer"
 import * as type from "io-ts"
 import { ErrorState } from "src/state/errorReducer"
+import { ResultState } from "src/state/resultReducer"
 
 export type Action = Pick<i18nAction, "type"> // And any other possible reducer types
 
-export type GlobalState = WithTranslation & UserInputReducerState & ErrorState
+export type GlobalState = WithTranslation &
+  UserInputReducerState &
+  ErrorState &
+  ResultState
 
 export type Translated = {
   t: TFunction

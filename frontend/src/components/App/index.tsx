@@ -10,6 +10,7 @@ import Loading from "../Loading"
 import Results from "../Results"
 import styled from "styled-components"
 import "bootstrap/dist/css/bootstrap.min.css"
+import ErrorNotification from "../ErrorNotification"
 
 const AppStyles = styled.div`
   position: fixed;
@@ -34,5 +35,6 @@ export default connect(mapStateToProps)(({ t }: ConnectedApp) => (
     <UserInput />
     <Loading />
     <Results />
+    <ErrorNotification />
   </AppStyles>
 ))

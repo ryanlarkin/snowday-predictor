@@ -5,5 +5,12 @@
   "inputLabel": "Enter your zip or postal code here:",
   "inputInvalid": "Invalid zip/postal code",
   "submitButton": "Predict",
-  "inputPlaceholder": "e.g. 02139 or N2L 3G1"
+  "inputPlaceholder": "e.g. 02139 or N2L 3G1",
+  "result": "{{chance}}%",
+  "invalidPostalCode": "Invalid postal code {{0}}",
+  "invalidZipCode": "Invalid zip code {{0}}",
+  "nullData": "No data was returned. If the problem persists, please consider opening an issue on our GitHub page.",
+  "malformedResponse": "Could not read prediction results. If the problem persists, please consider opening an issue on our GitHub page.",
+  "unknownError": "The following error has occured: \"{{0}}: {{1}}\". If the problem persists, please consider opening an issue on our GitHub page.",
+  "errorHeading": "Could not load results"
 }

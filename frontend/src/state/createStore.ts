@@ -10,6 +10,7 @@ import i18nReducer from "./i18nReducer"
 import UserInputReducer from "./userInputReducer"
 import reduceReducers from "reduce-reducers"
 import ErrorReducer from "./errorReducer"
+import ResultReducer from "./resultReducer"
 
 const asyncDispatchMiddleware: Middleware<Dispatch> = ({
   dispatch,
@@ -42,10 +43,13 @@ const reducer = reduceReducers(
     code: null,
     loading: false,
     error: null,
+    chance: null,
+    location: null,
   },
   i18nReducer,
   UserInputReducer,
-  ErrorReducer
+  ErrorReducer,
+  ResultReducer
 )
 
 const createStore = () =>
