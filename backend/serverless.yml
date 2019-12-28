@@ -5,20 +5,24 @@
 # uses to deploy your code to your provider of choice
 
 # The `service` block is the name of the service
-service: hello-world
+service: apollo-lambda
 
 # The `provider` block defines where your service will be deployed
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs8.10
 
 # The `functions` block defines what code to deploy
 functions:
-  hello:
-    handler: dist/hello.handler
+  graphql:
+    # this is formatted as <FILENAME>.<HANDLER>
+    handler: graphql.graphqlHandler
+    environment:
+      SLS_DEBUG: true
     # The `events` block defines how to trigger the handler.helloWorld code
     events:
       - http:
-          path: hello
-          method: GET
+          path: graphql
+          method: post
           cors: true
+          integration: lambda-proxy
