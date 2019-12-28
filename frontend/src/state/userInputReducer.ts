@@ -5,7 +5,8 @@ import { AnyAction } from "redux"
 import { ErrorType } from "./errorReducer"
 
 const fetch = createApolloFetch({
-  uri: "http://localhost:4000/graphql",
+  uri:
+    "https://a5lqw0a1u1.execute-api.us-east-2.amazonaws.com/default/snowday-predict",
 })
 
 export type UserInputAction = {
