@@ -1,13 +1,31 @@
-import { createApolloFetch } from "apollo-fetch"
 import { ApiResponse } from "../types/types"
 import { isRight } from "fp-ts/lib/Either"
 import { AnyAction } from "redux"
 import { ErrorType } from "./errorReducer"
+import ApolloClient, { gql } from "apollo-boost"
 
-const fetch = createApolloFetch({
+const client = new ApolloClient({
   uri:
     "https://a5lqw0a1u1.execute-api.us-east-2.amazonaws.com/default/snowday-predict",
 })
+const query = gql`
+  query SnowdayPrediction($code: String!) {
+    prediction(code: $code) {
+      data {
+        chance
+        location {
+          code {
+            codeValue
+            type
+          }
+        }
+      }
+      error {
+        id
+      }
+    }
+  }
+`
 
 export type UserInputAction = {
   type: "SET_POSTALCODE"
@@ -33,25 +51,11 @@ export default (
   { code, type, asyncDispatch }: WithAsyncDispatch
 ) => {
   if (type === "SET_POSTALCODE") {
-    fetch({
-      query: `query SnowdayPrediction($code: String!) {
-        prediction(code: $code) {
-            data {
-                chance
-                location{
-                  code {
-                    codeValue
-                    type
-                  }
-                }
-              }
-              error{
-                id
-              }
-        }
-      }`,
-      variables: { code },
-    })
+    client
+      .query({
+        query,
+        variables: { code },
+      })
       .then(res => {
         const decoded = ApiResponse.decode(res)
         if (isRight(decoded)) {
