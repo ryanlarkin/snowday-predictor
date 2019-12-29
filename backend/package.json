@@ -9,6 +9,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@tensorflow/tfjs": "^1.5.1",
     "apollo-server-lambda": "^2.9.15"
   }
 }
