@@ -23,6 +23,7 @@ export const ApiResponse = type.type({
       data: type.union([
         type.null,
         type.type({
+          date: type.string,
           chance: type.number,
           location: type.type({
             code: type.type({

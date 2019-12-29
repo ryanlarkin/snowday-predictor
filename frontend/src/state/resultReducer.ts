@@ -7,6 +7,7 @@ export type ResultAction = {
     }
   } | null
   chance: number | null
+  date: Date
 }
 
 export type ResultState = {
@@ -22,14 +23,19 @@ export type ResultState = {
   }
   chance: number
   loading: boolean
+  date: Date
 }
 
-export default (state: ResultState, { type, location, chance }: ResultAction) =>
+export default (
+  state: ResultState,
+  { type, location, chance, date }: ResultAction
+) =>
   type === "SET_RESULT"
     ? Object.assign({}, state, {
         loading: false,
         error: null,
         location: { ...location },
         chance,
+        date,
       })
     : state

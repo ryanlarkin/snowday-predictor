@@ -16,12 +16,14 @@ type ConnectedResults = {
     }
   } | null
   chance: number | null
+  date: Date
 }
 
 const mapStateToProps = (props: GlobalState) => ({
   t: props.t,
   chance: props.chance,
   location: props.location,
+  date: props.date,
 })
 
 const StyledResults = styled.div`
@@ -35,16 +37,17 @@ const StyledResults = styled.div`
   }
 `
 
-export default connect(mapStateToProps)(({ t, chance }: ConnectedResults) =>
-  !chance ? (
-    <></>
-  ) : (
-    <StyledResults>
-      <Badge variant="primary">
-        {t("result", {
-          chance: Math.round(chance * 100),
-        })}
-      </Badge>
-    </StyledResults>
-  )
+export default connect(mapStateToProps)(
+  ({ t, chance, date }: ConnectedResults) =>
+    !chance ? (
+      <></>
+    ) : (
+      <StyledResults>
+        <Badge variant="primary">
+          {t("result", {
+            chance: Math.round(chance * 100),
+          })}
+        </Badge>
+      </StyledResults>
+    )
 )

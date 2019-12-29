@@ -13,6 +13,7 @@ const query = gql`
     prediction(code: $code) {
       data {
         chance
+        date
         location {
           code {
             codeValue
@@ -78,10 +79,24 @@ export default (
             })
           } else {
             const data = decoded.right.data.prediction.data
-            asyncDispatch({
-              type: "SET_RESULT",
-              ...data,
-            })
+
+            const date = new Date(data.date)
+
+            if (isNaN(date.getDate())) {
+              console.error("Invalid date", date)
+              asyncDispatch({
+                type: "SET_ERROR",
+                error: {
+                  errorKey: "malformedResponse",
+                } as ErrorType,
+              })
+            } else {
+              asyncDispatch({
+                type: "SET_RESULT",
+                ...data,
+                date,
+              })
+            }
           }
         } else {
           console.error(decoded.left)

@@ -1,12 +1,15 @@
 // graphql.js
 
 const { ApolloServer, gql } = require('apollo-server-lambda');
+const { GraphQLDate } = require('graphql-iso-date');
 
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
 // your data.
 const typeDefs = gql`
   # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
+
+  scalar Date
 
   enum CodeType {
     POSTAL
@@ -26,6 +29,7 @@ const typeDefs = gql`
   type PredictionResultData {
     chance: Float!
     location: Location!
+    date: Date!
   }
 
   type Location {
@@ -47,6 +51,7 @@ const typeDefs = gql`
 // Resolvers define the technique for fetching the types defined in the
 // schema. This resolver retrieves books from the "books" array above.
 const resolvers = {
+  Date: GraphQLDate,
   Query: {
     prediction(parent, args, context, info) {
       return {
@@ -57,7 +62,8 @@ const resolvers = {
               codeValue: args.code,
               type: "POSTAL"
             }
-          }
+          },
+          date: new Date(),
         }
       };
     }
