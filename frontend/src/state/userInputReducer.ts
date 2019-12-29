@@ -2,12 +2,22 @@ import { ApiResponse } from "../types/types"
 import { isRight } from "fp-ts/lib/Either"
 import { AnyAction } from "redux"
 import { ErrorType } from "./errorReducer"
-import ApolloClient, { gql } from "apollo-boost"
+import { ApolloClient } from "apollo-client"
+import { createHttpLink } from "apollo-link-http"
+import { InMemoryCache } from "apollo-cache-inmemory"
+import gql from "graphql-tag"
+import "cross-fetch/polyfill"
 
-const client = new ApolloClient({
+const httpLink = createHttpLink({
   uri:
     "https://a5lqw0a1u1.execute-api.us-east-2.amazonaws.com/default/snowday-predict",
 })
+
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: httpLink,
+})
+
 const query = gql`
   query SnowdayPrediction($code: String!) {
     prediction(code: $code) {

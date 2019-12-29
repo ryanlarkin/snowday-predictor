@@ -30,10 +30,19 @@ const StyledResults = styled.div`
   display: flex;
   justify-content: center;
 
+  p {
+    text-align: center;
+    color: #ccdbdc;
+    font-size: 1.5rem;
+    margin-bottom: 0px;
+  }
+
   .badge {
     background-color: #ccdbdc;
     color: #012a36;
     font-size: 3rem;
+    display: flex;
+    justify-content: center;
   }
 `
 
@@ -43,11 +52,20 @@ export default connect(mapStateToProps)(
       <></>
     ) : (
       <StyledResults>
-        <Badge variant="primary">
-          {t("result", {
-            chance: Math.round(chance * 100),
-          })}
-        </Badge>
+        <div>
+          <p>
+            {t("dateFormat", {
+              date: date.getDate(),
+              weekday: t("day", { context: date.getDay().toString() }),
+              month: t("month", { context: date.getMonth().toString() }),
+            })}
+          </p>
+          <Badge variant="primary">
+            {t("result", {
+              chance: Math.round(chance * 100),
+            })}
+          </Badge>
+        </div>
       </StyledResults>
     )
 )
