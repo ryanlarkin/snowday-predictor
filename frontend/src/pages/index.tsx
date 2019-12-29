@@ -7,6 +7,7 @@ import { i18nAction } from "../state/i18nReducer"
 import { connect } from "react-redux"
 import { WithTranslation } from "react-i18next"
 import App from "../components/App"
+import { StaticQuery, graphql } from "gatsby"
 
 const mapStateToProps = () => ({})
 
@@ -28,7 +29,16 @@ export default withI18next({ ns: "common" })(
 
     return (
       <>
-        <Header />
+        <StaticQuery
+          query={graphql`
+            {
+              gitCommit(latest: { eq: true }) {
+                hash
+              }
+            }
+          `}
+          render={data => <Header data={data} />}
+        />
         <App />
       </>
     )

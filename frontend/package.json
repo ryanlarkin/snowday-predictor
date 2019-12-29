@@ -30,6 +30,7 @@
     "gatsby-plugin-react-helmet": "^3.1.18",
     "gatsby-plugin-styled-components": "^3.1.16",
     "gatsby-plugin-typescript": "^2.1.15",
+    "gatsby-source-local-git": "^0.2.2",
     "graphql-tag": "^2.10.1",
     "i18next": "^17.2.0",
     "io-ts": "^2.0.2",
