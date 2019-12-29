@@ -23,7 +23,8 @@ const withI18next = (options = {}) => (
       this.state = {
         ns: "",
         ...options,
-        data: data ? data : pageContext.data,
+        data: pageContext.data,
+        queryData: data,
       }
 
       this.i18n = setupI18next()

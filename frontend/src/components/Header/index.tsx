@@ -6,7 +6,7 @@ import { TFunction } from "i18next"
 
 type ConnectedHeader = {
   t: TFunction
-  data: {
+  queryData: {
     gitCommit: {
       hash: string
     }
@@ -17,11 +17,11 @@ const mapStateToProps = (props: GlobalState) => ({
   t: props.t,
 })
 
-export default connect(mapStateToProps)(({ t, data }: ConnectedHeader) => (
+export default connect(mapStateToProps)(({ t, queryData }: ConnectedHeader) => (
   <Helmet
     defer={false}
     defaultTitle={t("title")}
     titleTemplate={`%s | ${t("title")}`}
-    meta={[{ name: "commit", content: data.gitCommit.hash }]}
+    meta={[{ name: "commit", content: queryData.gitCommit.hash }]}
   />
 ))

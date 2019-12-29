@@ -8,6 +8,10 @@ import { connect } from "react-redux"
 import { WithTranslation } from "react-i18next"
 import App from "../components/App"
 import { StaticQuery, graphql } from "gatsby"
+import { library } from "@fortawesome/fontawesome-svg-core"
+import { faGithub } from "@fortawesome/free-brands-svg-icons"
+
+library.add(faGithub)
 
 const mapStateToProps = () => ({})
 
@@ -37,7 +41,7 @@ export default withI18next({ ns: "common" })(
               }
             }
           `}
-          render={data => <Header data={data} />}
+          render={data => <Header queryData={data} />}
         />
         <App />
       </>

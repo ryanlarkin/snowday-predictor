@@ -16,6 +16,22 @@ const StyledButton = styled(Button)`
   border-color: #012a36 !important;
   color: #ccdbdc !important;
 
+  svg:not(:root).svg-inline--fa {
+    overflow: visible;
+  }
+
+  .svg-inline--fa.fa-w-16 {
+    width: 1em;
+  }
+
+  .svg-inline--fa {
+    display: inline-block;
+    font-size: inherit;
+    height: 1em;
+    overflow: visible;
+    vertical-align: -0.125em;
+  }
+
   :hover {
     background-color: #0a324f !important;
     border-color: #0a324f !important;

@@ -14,7 +14,6 @@ const TitleStyles = styled(Navbar)`
   padding-bottom: 5rem !important;
 
   .page-title {
-    @import url("https://fonts.googleapis.com/css?family=Lobster&display=swap");
     font-family: "Lobster", cursive;
     font-size: 5rem;
     color: #ccdbdc !important;
