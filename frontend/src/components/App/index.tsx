@@ -11,6 +11,7 @@ import Results from "../Results"
 import styled from "styled-components"
 import "bootstrap/dist/css/bootstrap.min.css"
 import ErrorNotification from "../ErrorNotification"
+import Footer from "../Footer"
 
 const AppStyles = styled.div`
   position: fixed;
@@ -36,5 +37,6 @@ export default connect(mapStateToProps)(({ t }: ConnectedApp) => (
     <Loading />
     <Results />
     <ErrorNotification />
+    <Footer />
   </AppStyles>
 ))

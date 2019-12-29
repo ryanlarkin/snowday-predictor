@@ -33,14 +33,14 @@ const StyledResults = styled.div`
   p {
     text-align: center;
     color: #ccdbdc;
-    font-size: 1.5rem;
+    font-size: 3rem;
     margin-bottom: 0px;
   }
 
   .badge {
     background-color: #ccdbdc;
     color: #012a36;
-    font-size: 3rem;
+    font-size: 6rem;
     display: flex;
     justify-content: center;
   }

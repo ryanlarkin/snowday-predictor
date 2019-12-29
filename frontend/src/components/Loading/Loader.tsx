@@ -7,8 +7,8 @@ const StyledLoader = styled(Loader)`
   justify-content: center;
 
   svg {
-    width: 5rem;
-    height: 5rem;
+    width: 10rem;
+    height: 10rem;
   }
 `
 

@@ -11,11 +11,12 @@ import GitHub from "./GitHub"
 
 const TitleStyles = styled(Navbar)`
   background: #012a36;
+  padding-bottom: 5rem !important;
 
   .page-title {
     @import url("https://fonts.googleapis.com/css?family=Lobster&display=swap");
     font-family: "Lobster", cursive;
-    font-size: 3.5rem;
+    font-size: 5rem;
     color: #ccdbdc !important;
   }
 `

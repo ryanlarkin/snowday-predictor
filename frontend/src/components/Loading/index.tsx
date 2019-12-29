@@ -5,6 +5,7 @@ import { GlobalState } from "../../types/types"
 import React from "react"
 import { connect } from "react-redux"
 import Loader from "./Loader"
+import styled from "styled-components"
 
 type ConnectedLoading = {
   t: TFunction
@@ -16,6 +17,16 @@ const mapStateToProps = (props: GlobalState) => ({
   loading: props.loading,
 })
 
-export default connect(mapStateToProps)(({ t, loading }: ConnectedLoading) =>
-  loading ? <Loader /> : <></>
-)
+const StyledLoading = styled.div`
+  .hide {
+    visibility: hidden;
+  }
+`
+
+export default connect(mapStateToProps)(({ t, loading }: ConnectedLoading) => (
+  <StyledLoading>
+    <div className={loading ? "unhide" : "hide"}>
+      <Loader />
+    </div>
+  </StyledLoading>
+))

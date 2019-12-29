@@ -38,16 +38,16 @@ const StyledUserInput = styled.div`
     flex-grow: 1;
   }
 
-  .submitCol {
+  .submit-col {
     flex-grow: 0;
   }
 
-  .inputLabel {
-    font-size: 1.2rem;
+  .input-label {
+    font-size: 2.4rem;
     color: #ccdbdc !important;
   }
 
-  .inputSubmit {
+  .input-submit {
     background-color: #56a3a6 !important;
     border-color: #56a3a6 !important;
     color: #ccdbdc !important;
@@ -60,6 +60,18 @@ const StyledUserInput = styled.div`
 
   .form-row {
     justify-content: center;
+  }
+
+  .form-control {
+    font-size: 2rem !important;
+  }
+
+  .input-submit {
+    font-size: 2rem !important;
+  }
+
+  .invalid-feedback {
+    font-size: 1.25rem;
   }
 `
 
@@ -90,8 +102,8 @@ export default connect(
         <Form className="form" noValidate onSubmit={handleSubmit}>
           <Form.Row>
             <Form.Group as={Col} md="5" controlId="postalCodeValidation">
-              <Form.Label className="inputLabel">{t("inputLabel")}</Form.Label>
-              <Form.Row>
+              <Form.Label className="input-label">{t("inputLabel")}</Form.Label>
+              <Form.Row className="input-row">
                 <Col>
                   <Form.Control
                     type="text"
@@ -113,9 +125,9 @@ export default connect(
                     {t("inputInvalid")}
                   </Form.Control.Feedback>
                 </Col>
-                <Col className="submitCol">
+                <Col className="submit-col">
                   <Button
-                    className="inputSubmit"
+                    className="input-submit"
                     disabled={!isValid || !values.postalCode}
                     type="submit"
                   >
