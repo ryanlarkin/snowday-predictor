@@ -11,19 +11,31 @@ import { StaticQuery, graphql } from "gatsby"
 import { library } from "@fortawesome/fontawesome-svg-core"
 import { faGithub } from "@fortawesome/free-brands-svg-icons"
 
+// Preload GitHub icon
 library.add(faGithub)
 
+// Don't map anything, but required since there is a custom dispatcher
 const mapStateToProps = () => ({})
 
+/**
+ * Component prop types
+ */
 type ConnectedProps = {
+  /**
+   * Sets the translation data/functions for all components to use
+   */
   setLang: (t: TFunction, i18n: i18n, tReady: boolean) => i18nAction
 } & WithTranslation
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
+  // Sets the required translation data
   setLang: (t: TFunction, i18n: i18n, tReady: boolean) =>
     dispatch<i18nAction>({ type: "SET_TRANSLATION", t, i18n, tReady }),
 })
 
+/**
+ * Base page that renders the app and sets header information
+ */
 export default withI18next({ ns: "common" })(
   connect(
     mapStateToProps,

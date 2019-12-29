@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faGithub } from "@fortawesome/free-brands-svg-icons"
 import styled from "styled-components"
 
+// Set sizing and colours, also set SVG CSS so it doesn't need to be changed later
 const StyledButton = styled(Button)`
   margin: 2.5rem;
   font-size: 3rem !important;
@@ -38,7 +39,13 @@ const StyledButton = styled(Button)`
   }
 `
 
+/**
+ * Type declaration for component props
+ */
 type ConnectedGitHub = {
+  /**
+   * Translation function
+   */
   t: TFunction
 }
 
@@ -46,6 +53,9 @@ const mapStateToProps = (props: GlobalState) => ({
   t: props.t,
 })
 
+/**
+ * Show the GitHub icon linking to the repository of this project
+ */
 export default connect(mapStateToProps)(({ t }: ConnectedGitHub) => (
   <StyledButton
     target="blank"

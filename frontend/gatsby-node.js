@@ -1,4 +1,6 @@
 const fs = require("fs")
+
+// Load translations from filesystem
 const localesNSContent = {
   en: [
     {
@@ -14,14 +16,17 @@ const localesNSContent = {
   ],
 }
 
+// Locales that may be used on the side
 const availableLocales = [
-  { value: "fr", text: "Français" },
+  // TODO: Finish french translations are re-enable
+  //  { value: "fr", text: "Français" },
   { value: "en", text: "English" },
 ]
 
 // default locales don't end up in a specific locale route i.e example.com for english and example.com/fr for franch
 const defaultLocales = { value: "en", text: "English" }
 
+// Make page for each language
 exports.onCreatePage = async props => {
   const {
     page,
@@ -32,11 +37,14 @@ exports.onCreatePage = async props => {
     return
   }
 
+  // Delete original page
   deletePage(page)
 
+  // Recreate translated page for the given language
   availableLocales.map(({ value }) => {
     let newPath = `/${value}${page.path}`
     if (defaultLocales.value === value) {
+      // Create page with no language path for default language
       const localePage = {
         ...page,
         originalPath: page.path,
@@ -53,6 +61,7 @@ exports.onCreatePage = async props => {
       newPath = page.path
     }
 
+    // Create page with language path in URL
     const localePage = {
       ...page,
       originalPath: page.path,

@@ -6,7 +6,13 @@ import React from "react"
 import { connect } from "react-redux"
 import styled from "styled-components"
 
+/**
+ * Type declaration for component props
+ */
 type ConnectedFooter = {
+  /**
+   * Translation function
+   */
   t: TFunction
 }
 
@@ -14,6 +20,7 @@ const mapStateToProps = (props: GlobalState) => ({
   t: props.t,
 })
 
+// Move to bottom left corner of screen, with a small margin
 const StyledFooter = styled.div`
   color: #ccdbdc;
   position: absolute;
@@ -26,6 +33,9 @@ const StyledFooter = styled.div`
   }
 `
 
+/**
+ * Displays the label with author information in bottom left corner of screen
+ */
 export default connect(mapStateToProps)(({ t }: ConnectedFooter) => (
   <StyledFooter>
     <p>{t("authors")}</p>

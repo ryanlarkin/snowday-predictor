@@ -1,5 +1,3 @@
-import { TFunction } from "i18next"
-
 import { GlobalState } from "../../types/types"
 
 import React from "react"
@@ -7,8 +5,13 @@ import { connect } from "react-redux"
 import Loader from "./Loader"
 import styled from "styled-components"
 
+/**
+ * Type declaration for component props
+ */
 type ConnectedLoading = {
-  t: TFunction
+  /**
+   * Whether or not the loader should display
+   */
   loading: boolean
 }
 
@@ -17,6 +20,7 @@ const mapStateToProps = (props: GlobalState) => ({
   loading: props.loading,
 })
 
+// Animate hiding and unhiding of loader
 const StyledLoading = styled.div`
   .unhide {
     transition: visibility 0.2s linear, opacity 0.2s linear;
@@ -31,7 +35,10 @@ const StyledLoading = styled.div`
   }
 `
 
-export default connect(mapStateToProps)(({ t, loading }: ConnectedLoading) => (
+/**
+ * Shows an animated loader when loading, hides the component when not loading
+ */
+export default connect(mapStateToProps)(({ loading }: ConnectedLoading) => (
   <StyledLoading>
     <div className={loading ? "unhide" : "hide"}>
       <Loader />

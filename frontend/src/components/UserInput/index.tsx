@@ -11,6 +11,9 @@ import styled from "styled-components"
 import { UserInputAction } from "src/state/userInputReducer"
 import { Dispatch } from "redux"
 
+/**
+ * Required input format for zip/postal code
+ */
 const schema = object({
   postalCode: string()
     .matches(
@@ -19,8 +22,18 @@ const schema = object({
     .required(),
 })
 
+/**
+ * Type declaration for component props
+ */
 type ConnectedUserInput = {
+  /**
+   * Translation function
+   */
   t: TFunction
+
+  /**
+   * Dispatch to save the postal/zip code and send prediction query
+   */
   setCode: (code: string) => UserInputAction
 }
 
@@ -29,10 +42,12 @@ const mapStateToProps = (props: GlobalState) => ({
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
+  // Sets postal/zip code and starts invocation of query to backend
   setCode: (code: string) =>
     dispatch<UserInputAction>({ type: "SET_POSTALCODE", code }),
 })
 
+// Sizing and colours, make text input expand rather than submit button
 const StyledUserInput = styled.div`
   input[name="postalCode"] {
     flex-grow: 1;
@@ -73,8 +88,15 @@ const StyledUserInput = styled.div`
   .invalid-feedback {
     font-size: 1.25rem;
   }
+
+  .disabled {
+    cursor: pointer;
+  }
 `
 
+/**
+ * Component for receiving postal/zip code from user. Sends query on submit
+ */
 export default connect(
   mapStateToProps,
   mapDispatchToProps
@@ -121,6 +143,7 @@ export default connect(
                       }
                     }}
                   />
+                  {/* Tell the user what they did wrong when the form has errors */}
                   <Form.Control.Feedback type="invalid">
                     {t("inputInvalid")}
                   </Form.Control.Feedback>

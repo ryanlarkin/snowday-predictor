@@ -1,9 +1,4 @@
-import { TFunction } from "i18next"
-
-import { GlobalState } from "../../types/types"
-
 import React from "react"
-import { connect } from "react-redux"
 import TitleBar from "../TitleBar"
 import UserInput from "../UserInput"
 import Loading from "../Loading"
@@ -13,6 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import ErrorNotification from "../ErrorNotification"
 import Footer from "../Footer"
 
+// Apply background colour to entire screen
 const AppStyles = styled.div`
   position: fixed;
   top: 0;
@@ -22,15 +18,10 @@ const AppStyles = styled.div`
   background: #012a36;
 `
 
-type ConnectedApp = {
-  t: TFunction
-}
-
-const mapStateToProps = (props: GlobalState) => ({
-  t: props.t,
-})
-
-export default connect(mapStateToProps)(({ t }: ConnectedApp) => (
+/**
+ * Base component that renders all other components of the website
+ */
+export default () => (
   <AppStyles>
     <TitleBar />
     <UserInput />
@@ -39,4 +30,4 @@ export default connect(mapStateToProps)(({ t }: ConnectedApp) => (
     <ErrorNotification />
     <Footer />
   </AppStyles>
-))
+)

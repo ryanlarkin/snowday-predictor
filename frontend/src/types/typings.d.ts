@@ -1,3 +1,6 @@
+/**
+ * Minimum typings to make gatsby-i18n work with TypeScript
+ */
 declare module "gatsby-i18n" {
   export const Language: any
   export const Link: any

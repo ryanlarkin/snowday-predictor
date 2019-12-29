@@ -1,22 +1,43 @@
 import { TFunction } from "i18next"
 import { i18nAction } from "src/state/i18nReducer"
 import { WithTranslation } from "react-i18next"
-import { UserInputReducerState } from "src/state/userInputReducer"
+import {
+  UserInputReducerState,
+  UserInputAction,
+} from "src/state/userInputReducer"
 import * as type from "io-ts"
-import { ErrorState } from "src/state/errorReducer"
-import { ResultState } from "src/state/resultReducer"
+import { ErrorState, ErrorAction } from "src/state/errorReducer"
+import { ResultState, ResultAction } from "src/state/resultReducer"
 
-export type Action = Pick<i18nAction, "type"> // And any other possible reducer types
+/**
+ * Required type literals for any action
+ */
+export type Action = Pick<ErrorAction, "type"> &
+  Pick<i18nAction, "type"> &
+  Pick<ResultAction, "type"> &
+  Pick<UserInputAction, "type">
 
+/**
+ * State for entire store
+ */
 export type GlobalState = WithTranslation &
   UserInputReducerState &
   ErrorState &
   ResultState
 
+/**
+ * Type to hold translation information
+ */
 export type Translated = {
+  /**
+   * The translation function
+   */
   t: TFunction
 }
 
+/**
+ * Object type verification schema for GraphQL API responses
+ */
 export const ApiResponse = type.type({
   data: type.type({
     prediction: type.type({

@@ -12,6 +12,10 @@ import reduceReducers from "reduce-reducers"
 import ErrorReducer from "./errorReducer"
 import ResultReducer from "./resultReducer"
 
+/**
+ * Sends dispatch after the current is complete
+ * @param param0 The object containing the dispatch information
+ */
 const asyncDispatchMiddleware: Middleware<Dispatch> = ({
   dispatch,
 }: MiddlewareAPI) => next => (action: AnyAction) => {
@@ -38,6 +42,7 @@ const asyncDispatchMiddleware: Middleware<Dispatch> = ({
   flushQueue()
 }
 
+// Combines all reducers and sets the initial state
 const reducer = reduceReducers(
   {
     code: null,
@@ -45,6 +50,7 @@ const reducer = reduceReducers(
     error: null,
     chance: null,
     location: null,
+    date: null,
   },
   i18nReducer,
   UserInputReducer,
@@ -52,6 +58,9 @@ const reducer = reduceReducers(
   ResultReducer
 )
 
+/**
+ * Creates the store to use in React shared between all components
+ */
 const createStore = () =>
   reduxCreateStore(reducer, applyMiddleware(asyncDispatchMiddleware))
 export default createStore

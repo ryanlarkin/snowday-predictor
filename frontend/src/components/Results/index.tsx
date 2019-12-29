@@ -7,16 +7,44 @@ import { connect } from "react-redux"
 import { Badge } from "react-bootstrap"
 import styled from "styled-components"
 
+/**
+ * Type declaration for component props
+ */
 type ConnectedResults = {
+  /**
+   * Translation function
+   */
   t: TFunction
+
+  /**
+   * The location that the query was for, or null if there are no results
+   */
   location: {
+    /**
+     * The postal or zip code of the location
+     */
     code: {
+      /**
+       * Whether this is a postal code or zip code
+       */
       type: "ZIP" | "POSTAL"
+
+      /**
+       * The value of the postal/zip code
+       */
       codeValue: string
     }
   } | null
+
+  /**
+   * The prediction result for the location, or null if there is no result
+   */
   chance: number | null
-  date: Date
+
+  /**
+   * The date that the prediction is for, or null if there is not result
+   */
+  date: Date | null
 }
 
 const mapStateToProps = (props: GlobalState) => ({
@@ -26,6 +54,7 @@ const mapStateToProps = (props: GlobalState) => ({
   date: props.date,
 })
 
+// Centre component, and set colours/sizing
 const StyledResults = styled.div`
   display: flex;
   justify-content: center;
@@ -46,9 +75,13 @@ const StyledResults = styled.div`
   }
 `
 
+/**
+ * Shows the chance of a snowday, and the day that the prediction is for.
+ * Hides the prediction if there was no query response
+ */
 export default connect(mapStateToProps)(
   ({ t, chance, date }: ConnectedResults) =>
-    !chance ? (
+    !(chance && date) ? (
       <></>
     ) : (
       <StyledResults>
