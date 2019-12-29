@@ -1,7 +1,9 @@
 // graphql.js
+import * as tf from "@tensorflow/tfjs";
 
 const { ApolloServer, gql } = require('apollo-server-lambda');
 const { GraphQLDate } = require('graphql-iso-date');
+const model = await tf.loadLayersModel("model.h5");
 
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
@@ -54,9 +56,23 @@ const resolvers = {
   Date: GraphQLDate,
   Query: {
     prediction(parent, args, context, info) {
+      if (args.code.charAt(0) < '0' && args.code.charAt(0) > '9') {
+        countryCode = "CA";
+      } else {
+        countryCode = "US";
+      }
+
+      weatherDataCall =
+        "api.openweathermap.org/data/2.5/forecast?zip=" +
+        args.code +
+        "," +
+        countryCode +
+        "&APPID=" +
+       process.env.key;
+
       return {
         data: {
-          chance: 0.99,
+          chance: model.predict(),
           location: {
             code: {
               codeValue: args.code,
@@ -70,7 +86,7 @@ const resolvers = {
   }
 };
 
-const server = new ApolloServer({ 
+const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: ({ event, context }) => ({
