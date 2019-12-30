@@ -1,8 +1,8 @@
 // graphql.js
 import * as tf from "@tensorflow/tfjs";
 
-const { ApolloServer, gql } = require('apollo-server-lambda');
-const { GraphQLDate } = require('graphql-iso-date');
+const { ApolloServer, gql } = require("apollo-server-lambda");
+const { GraphQLDate } = require("graphql-iso-date");
 const model = await tf.loadLayersModel("model.h5");
 
 // A schema is a collection of type definitions (hence "typeDefs")
@@ -56,19 +56,30 @@ const resolvers = {
   Date: GraphQLDate,
   Query: {
     prediction(parent, args, context, info) {
-      if (args.code.charAt(0) < '0' && args.code.charAt(0) > '9') {
+      if (args.code.charAt(0) < "0" && args.code.charAt(0) > "9") {
         countryCode = "CA";
       } else {
         countryCode = "US";
       }
 
-      weatherDataCall =
-        "api.openweathermap.org/data/2.5/forecast?zip=" +
+      if (countryCode === "CA") {
+        apiURL =
+          "http://api.openweathermap.org/data/2.5/forecast?zip=" +
+          args.code +
+          ",CA&appid=" +
+          process.env.key;
+      }
+      // Code is from the US
+      else
+      {
+        apiURL = 
+        "http://api.openweathermap.org/data/2.5/forecast?zip=" +
         args.code +
-        "," +
-        countryCode +
-        "&APPID=" +
-       process.env.key;
+        "&appid=" +
+        process.env.key;
+      }
+
+      apiData = $.getJSON(apiURL);
 
       return {
         data: {
@@ -79,7 +90,7 @@ const resolvers = {
               type: "POSTAL"
             }
           },
-          date: new Date(),
+          date: new Date()
         }
       };
     }
