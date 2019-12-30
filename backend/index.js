@@ -56,7 +56,7 @@ const resolvers = {
   Date: GraphQLDate,
   Query: {
     prediction(parent, args, context, info) {
-      let countryCode;
+      let countryCode, apiURL;
 
       if (args.code.charAt(0) < "0" && args.code.charAt(0) > "9") {
         countryCode = "CA";
@@ -81,8 +81,6 @@ const resolvers = {
       }
 
       let apiData;
-
-
       $.getJSON(apiURL, function(data) {
         apiData = data;
       });
