@@ -70,16 +70,19 @@ const resolvers = {
           process.env.key;
       }
       // Code is from the US
-      else
-      {
-        apiURL = 
-        "http://api.openweathermap.org/data/2.5/forecast?zip=" +
-        args.code +
-        "&appid=" +
-        process.env.key;
+      else {
+        apiURL =
+          "http://api.openweathermap.org/data/2.5/forecast?zip=" +
+          args.code +
+          "&appid=" +
+          process.env.key;
       }
 
-      apiData = $.getJSON(apiURL);
+      apiData = "";
+
+      $.getJSON(apiURL, function(data) {
+        apiData = data;
+      });
 
       return {
         data: {
