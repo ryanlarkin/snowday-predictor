@@ -12,7 +12,7 @@ import "cross-fetch/polyfill"
 // TODO: Save as environment variable somehow
 const httpLink = createHttpLink({
   uri:
-    "https://a5lqw0a1u1.execute-api.us-east-2.amazonaws.com/default/snowday-predict",
+    "https://api.snowdaypredictor.net/graphql",
 })
 
 // Client for sending requests
