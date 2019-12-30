@@ -56,7 +56,24 @@ const resolvers = {
   Date: GraphQLDate,
   Query: {
     prediction(parent, args, context, info) {
-      let countryCode, apiURL;
+      let countryCode, apiURL, apiData, currentDate;
+      const today = new Date();
+
+      if (today.getHours < 2.0) {
+        currentDate =
+          today.getFullYear +
+          "-" +
+          (1 + today.getMonth) +
+          "-" +
+          (1 + today.getDay);
+      } else {
+        currentDate =
+          today.getFullYear +
+          "-" +
+          (1 + today.getMonth) +
+          "-" +
+          (1 + today.getDay);
+      }
 
       if (args.code.charAt(0) < "0" && args.code.charAt(0) > "9") {
         countryCode = "CA";
@@ -80,12 +97,14 @@ const resolvers = {
           process.env.key;
       }
 
-      let apiData;
       $.getJSON(apiURL, function(data) {
         apiData = data;
       });
 
-      apiData
+      const nextDayData = apiData.filter(
+        datum => currentDate === datum.dt_txt.slice(0, 10)
+      );
+
       return {
         data: {
           chance: model.predict(),
