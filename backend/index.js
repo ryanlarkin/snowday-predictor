@@ -56,6 +56,8 @@ const resolvers = {
   Date: GraphQLDate,
   Query: {
     prediction(parent, args, context, info) {
+      let countryCode;
+
       if (args.code.charAt(0) < "0" && args.code.charAt(0) > "9") {
         countryCode = "CA";
       } else {
@@ -78,12 +80,14 @@ const resolvers = {
           process.env.key;
       }
 
-      apiData = "";
+      let apiData;
+
 
       $.getJSON(apiURL, function(data) {
         apiData = data;
       });
 
+      apiData
       return {
         data: {
           chance: model.predict(),
