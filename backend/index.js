@@ -50,6 +50,36 @@ const typeDefs = gql`
   }
 `;
 
+function getMinTemp(minTemp, weather) {
+  const curMinTemp = weather.list.main.temp_min;
+  if (minTemp > curMinTemp) {
+    return curMinTemp;
+  } else {
+    return minTemp;
+  }
+}
+
+function getMaxTemp(maxTemp, weather) {
+  const curMaxTemp = weather.list.main.temp_max;
+  if (maxTemp < curMaxTemp) {
+    return curMaxTemp;
+  } else {
+    return maxTemp;
+  }
+}
+
+function getTotalRain(totalRain, weather) {
+  return totalRain + weather.list.rain["3h"];
+}
+
+function getTotalSnow(totalSnow, weather) {
+  return totalSnow + weather.list.snow["3h"];
+}
+
+function getTotalPrecip(totalSnow, totalRain) {
+  return totalSnow + totalRain;
+}
+
 // Resolvers define the technique for fetching the types defined in the
 // schema. This resolver retrieves books from the "books" array above.
 const resolvers = {
@@ -57,6 +87,7 @@ const resolvers = {
   Query: {
     prediction(parent, args, context, info) {
       let countryCode, apiURL, apiData, currentDate;
+      let maxTemp, minTemp, totalRain, totalSnow, totalPrecip;
       const today = new Date();
 
       if (today.getHours < 2.0) {
@@ -104,6 +135,19 @@ const resolvers = {
       const nextDayData = apiData.filter(
         datum => currentDate === datum.dt_txt.slice(0, 10)
       );
+
+      // Determining values for parameters in the model
+      maxTemp = nextDayData.reduce(
+        getMaxTemp,
+        nextDayData[0].list.main.temp_min
+      );
+      minTemp = nextDayData.reduce(
+        getMinTemp,
+        nextDayData[0].list.main.temp_min
+      );
+      totalRain = nextDayData.reduce(getTotalRain, 0);
+      totalSnow = nextDayData.reduce(getTotalSnow, 0);
+      totalPrecip = totalRain + totalSnow;
 
       return {
         data: {
