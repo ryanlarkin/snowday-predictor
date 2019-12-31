@@ -10,5 +10,20 @@ module.exports = {
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-styled-components",
     "gatsby-source-local-git",
+    {
+      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      options: {
+        fonts: [
+          {
+            family: `Source Sans Pro`,
+            variants: ["600"],
+          },
+          {
+            family: `Lobster`,
+            variants: [`400`],
+          },
+        ],
+      },
+    },
   ],
 }
