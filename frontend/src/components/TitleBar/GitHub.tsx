@@ -4,13 +4,13 @@ import { GlobalState } from "../../types/types"
 
 import React from "react"
 import { connect } from "react-redux"
-import { Button } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faGithub } from "@fortawesome/free-brands-svg-icons"
 import styled from "styled-components"
+import { OutboundLink } from "../OutboundLink"
 
 // Set sizing and colours, also set SVG CSS so it doesn't need to be changed later
-const StyledButton = styled(Button)`
+const StyledButton = styled(OutboundLink)`
   margin: 2.5rem;
   font-size: 3rem !important;
   background-color: #012a36 !important;
