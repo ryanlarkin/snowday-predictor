@@ -51,7 +51,7 @@ const typeDefs = gql`
 `;
 
 function getMinTemp(minTemp, weather) {
-  const curMinTemp = weather.list.main.temp_min;
+  const curMinTemp = weather.main.temp_min;
   if (minTemp > curMinTemp) {
     return curMinTemp;
   } else {
@@ -60,7 +60,7 @@ function getMinTemp(minTemp, weather) {
 }
 
 function getMaxTemp(maxTemp, weather) {
-  const curMaxTemp = weather.list.main.temp_max;
+  const curMaxTemp = weather.main.temp_max;
   if (maxTemp < curMaxTemp) {
     return curMaxTemp;
   } else {
@@ -69,11 +69,11 @@ function getMaxTemp(maxTemp, weather) {
 }
 
 function getTotalRain(totalRain, weather) {
-  return totalRain + weather.list.rain["3h"];
+  return totalRain + weather.rain["3h"];
 }
 
 function getTotalSnow(totalSnow, weather) {
-  return totalSnow + weather.list.snow["3h"];
+  return totalSnow + weather.snow["3h"];
 }
 
 function getTotalPrecip(totalSnow, totalRain) {
@@ -85,33 +85,19 @@ function getTotalPrecip(totalSnow, totalRain) {
 const resolvers = {
   Date: GraphQLDate,
   Query: {
-    prediction(parent, args, context, info) {
+    async prediction(parent, args, context, info) {
       let countryCode, apiURL, apiData, currentDate;
       let maxTemp, minTemp, totalRain, totalSnow, totalPrecip;
       const today = new Date();
 
-      if (today.getHours < 2.0) {
-        currentDate =
-          today.getFullYear +
-          "-" +
-          (1 + today.getMonth) +
-          "-" +
-          (1 + today.getDay);
-      } else {
-        currentDate =
-          today.getFullYear +
-          "-" +
-          (1 + today.getMonth) +
-          "-" +
-          (1 + today.getDay);
-      }
-
+      //  Determines the country code
       if (args.code.charAt(0) < "0" && args.code.charAt(0) > "9") {
         countryCode = "CA";
       } else {
         countryCode = "US";
       }
 
+      // Determines API URL based on countryCode
       if (countryCode === "CA") {
         apiURL =
           "http://api.openweathermap.org/data/2.5/forecast?zip=" +
@@ -119,6 +105,7 @@ const resolvers = {
           ",CA&appid=" +
           process.env.key;
       }
+
       // Code is from the US
       else {
         apiURL =
@@ -128,22 +115,32 @@ const resolvers = {
           process.env.key;
       }
 
-      $.getJSON(apiURL, function(data) {
-        apiData = data;
-      });
+      // Retrieves weather data from the API
+      apiData = await $.getJSON(apiURL);
 
-      const nextDayData = apiData.filter(
+      const nextDayData = apiData.list.filter(
         datum => currentDate === datum.dt_txt.slice(0, 10)
       );
+
+      // Adjusts time based on timezone relative to UTC
+      today.setSeconds(today.getSeconds() + apiData.city.timezone);
+
+      // Determining time based on user's timezone
+      if (today.getHours() >= 2) {
+        today.setDate(today.getDate() + 1);
+      }
+
+      // Converts Date to string
+      currentDate = today.toISOString().slice(0, 10);
 
       // Determining values for parameters in the model
       maxTemp = nextDayData.reduce(
         getMaxTemp,
-        nextDayData[0].list.main.temp_min
+        nextDayData[0].main.temp_min
       );
       minTemp = nextDayData.reduce(
         getMinTemp,
-        nextDayData[0].list.main.temp_min
+        nextDayData[0].main.temp_min
       );
       totalRain = nextDayData.reduce(getTotalRain, 0);
       totalSnow = nextDayData.reduce(getTotalSnow, 0);
@@ -151,14 +148,14 @@ const resolvers = {
 
       return {
         data: {
-          chance: model.predict(),
+          chance: model.predict(maxTemp, minTemp, totalRain, totalSnow, totalPrecip),
           location: {
             code: {
               codeValue: args.code,
-              type: "POSTAL"
+              type: countryCode === "CA"? "POSTAL": "ZIP"
             }
           },
-          date: new Date()
+          date: today
         }
       };
     }
