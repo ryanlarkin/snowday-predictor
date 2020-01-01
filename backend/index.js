@@ -1,6 +1,4 @@
 // graphql.js
-import * as tf from "@tensorflow/tfjs";
-
 const { ApolloServer, gql } = require("apollo-server-lambda");
 const { GraphQLDate } = require("graphql-iso-date");
 const tf = require("@tensorflow/tfjs-layers");

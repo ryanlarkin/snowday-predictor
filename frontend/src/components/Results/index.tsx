@@ -81,16 +81,16 @@ const StyledResults = styled.div`
  */
 export default connect(mapStateToProps)(
   ({ t, chance, date }: ConnectedResults) =>
-    !(chance && date) ? (
+    !(chance !== null && date) ? (
       <></>
     ) : (
       <StyledResults>
         <div>
           <p>
             {t("dateFormat", {
-              date: date.getDate(),
-              weekday: t("day", { context: date.getDay().toString() }),
-              month: t("month", { context: date.getMonth().toString() }),
+              date: date.getUTCDate(),
+              weekday: t("day", { context: date.getUTCDay().toString() }),
+              month: t("month", { context: date.getUTCMonth().toString() }),
             })}
           </p>
           <Badge variant="primary">

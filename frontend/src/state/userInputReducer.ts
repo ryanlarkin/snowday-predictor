@@ -11,8 +11,7 @@ import "cross-fetch/polyfill"
 // Endpoint for request
 // TODO: Save as environment variable somehow
 const httpLink = createHttpLink({
-  uri:
-    "https://api.snowdaypredictor.net/graphql",
+  uri: "https://api.snowdaypredictor.net/graphql",
 })
 
 // Client for sending requests
