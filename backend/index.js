@@ -3,7 +3,7 @@ import * as tf from "@tensorflow/tfjs";
 
 const { ApolloServer, gql } = require("apollo-server-lambda");
 const { GraphQLDate } = require("graphql-iso-date");
-const model = await tf.loadLayersModel("model.h5");
+const loadTf = require('tensorflow-lambda')
 
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
@@ -80,12 +80,20 @@ function getTotalPrecip(totalSnow, totalRain) {
   return totalSnow + totalRain;
 }
 
+let model;
+
 // Resolvers define the technique for fetching the types defined in the
 // schema. This resolver retrieves books from the "books" array above.
 const resolvers = {
   Date: GraphQLDate,
   Query: {
     async prediction(parent, args, context, info) {
+      const tf = await loadTf()
+      if(!model) {
+        model = await tf.loadLayersModel('file://model.json');
+      }
+
+
       let countryCode, apiURL, apiData, currentDate;
       let maxTemp, minTemp, totalRain, totalSnow, totalPrecip;
       const today = new Date();
@@ -148,7 +156,7 @@ const resolvers = {
 
       return {
         data: {
-          chance: model.predict(maxTemp, minTemp, totalRain, totalSnow, totalPrecip),
+          chance: model.predict([maxTemp, minTemp, totalRain, totalSnow, totalPrecip]),
           location: {
             code: {
               codeValue: args.code,
