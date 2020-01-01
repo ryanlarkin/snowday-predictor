@@ -28,7 +28,7 @@
     "fp-ts": "^2.3.1",
     "gatsby": "^2.18.12",
     "gatsby-i18n": "^1.1.7",
-    "gatsby-plugin-google-analytics": "^2.1.31",
+    "gatsby-plugin-google-gtag": "^1.1.19",
     "gatsby-plugin-prefetch-google-fonts": "^1.4.3",
     "gatsby-plugin-react-helmet": "^3.1.18",
     "gatsby-plugin-styled-components": "^3.1.16",
