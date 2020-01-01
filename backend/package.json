@@ -9,9 +9,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@tensorflow/tfjs": "^1.5.1",
+    "@tensorflow/tfjs-core": "^1.5.1",
+    "@tensorflow/tfjs-layers": "^1.5.1",
     "apollo-server-lambda": "^2.9.15",
-    "graphql-iso-date": "^3.6.1",
-    "jquery": "^3.4.1"
+    "graphql-iso-date": "^3.6.1"
   }
 }

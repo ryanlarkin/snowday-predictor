@@ -12,7 +12,7 @@ print(weather_data)
 
 # define the keras model
 model = Sequential()
-model.add(Dense(30, input_dim=5, activation='relu'))
+model.add(Dense(5, input_dim=5, activation='relu'))
 model.add(Dense(11, input_dim=5, activation='relu'))
 model.add(Dense(1, activation='sigmoid'))
 
