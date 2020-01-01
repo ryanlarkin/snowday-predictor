@@ -7,4 +7,3 @@ def predict_snowday(max_temp, min_temp, total_rain, total_snow, total_precip):
 
     return prediction
 
-print(predict_snowday(0, -5.88, 0, 0.19, 0.19))

@@ -1,4 +1,4 @@
-import { TFunction } from "i18next"
+import { TFunction, TFunctionResult } from "i18next"
 
 import { GlobalState } from "../../types/types"
 
@@ -76,6 +76,24 @@ const StyledResults = styled.div`
 `
 
 /**
+ * Gets the number to display for percent edge cases which round to 0 or 100 but do not equal those values
+ *
+ * @param chance The unrounded percentage chance of a snowday from 0 to 100 (inclusive)
+ * @param t The translation function
+ * @returns Either the percentage rounded to no decimal places or special negligible
+ *            or certain values when the result is between (0, 0.5) or [99.5, 100)
+ */
+const getPercent = (chance: number, t: TFunction): TFunctionResult | number => {
+  if (chance > 0 && chance < 0.5) {
+    return t("negligible")
+  } else if (chance >= 99.5 && chance < 100) {
+    return t("almostCertain")
+  } else {
+    return Math.round(chance)
+  }
+}
+
+/**
  * Shows the chance of a snowday, and the day that the prediction is for.
  * Hides the prediction if there was no query response
  */
@@ -95,7 +113,7 @@ export default connect(mapStateToProps)(
           </p>
           <Badge variant="primary">
             {t("result", {
-              chance: Math.round(chance * 100),
+              chance: getPercent(chance * 100, t),
             })}
           </Badge>
         </div>

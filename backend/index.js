@@ -80,7 +80,7 @@ function getTotalSnow(totalSnow, weather) {
 
 const read = path =>
   new Promise((resolve, reject) =>
-    fs.readFile(path, "utf8", (err, data) =>
+    fs.readFile(path, (err, data) =>
       err ? reject(err) : resolve(data)
     )
   );
@@ -134,13 +134,6 @@ const prediction = async (parent, args, context, info) => {
 
     apiData = await fetch(apiURL, settings).then(res => res.json());
 
-    // Converts Date to string
-    currentDate = today.toISOString().slice(0, 10);
-
-    const nextDayData = apiData.list.filter(
-      datum => currentDate === datum.dt_txt.slice(0, 10)
-    );
-
     // Adjusts time based on timezone relative to UTC
     today.setSeconds(today.getSeconds() + apiData.city.timezone);
 
@@ -149,14 +142,19 @@ const prediction = async (parent, args, context, info) => {
       today.setDate(today.getDate() + 1);
     }
 
+    // Converts Date to string
+    currentDate = today.toISOString().slice(0, 10);
+
+    const nextDayData = apiData.list.filter(
+      datum => currentDate === datum.dt_txt.slice(0, 10)
+    );
+
     // Determining values for parameters in the model
     maxTemp = nextDayData.reduce(getMaxTemp, nextDayData[0].main.temp_min);
     minTemp = nextDayData.reduce(getMinTemp, nextDayData[0].main.temp_min);
     totalRain = nextDayData.reduce(getTotalRain, 0);
     totalSnow = nextDayData.reduce(getTotalSnow, 0);
     totalPrecip = totalRain + totalSnow;
-
-    // console.log([[maxTemp, minTemp, totalRain, totalSnow, totalPrecip]]);
 
     let chance = model.predict(
       tensor2d([[maxTemp, minTemp, totalRain, totalSnow, totalPrecip]])
@@ -171,7 +169,7 @@ const prediction = async (parent, args, context, info) => {
         chance,
         location: {
           code: {
-            codeValue: args.code.replace(/\s/g,''),
+            codeValue: args.code.replace(/\s/g,'').toUpperCase(),
             type: countryCode === "CA" ? "POSTAL" : "ZIP"
           }
         },
@@ -182,7 +180,7 @@ const prediction = async (parent, args, context, info) => {
     console.error(e);
     return {
       error: {
-        id: "unknownError"
+        id: "internalError"
       }
     };
   }
