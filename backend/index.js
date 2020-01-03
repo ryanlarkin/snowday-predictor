@@ -154,10 +154,9 @@ const prediction = async (parent, args, context, info) => {
     minTemp = nextDayData.reduce(getMinTemp, nextDayData[0].main.temp_min);
     totalRain = nextDayData.reduce(getTotalRain, 0);
     totalSnow = nextDayData.reduce(getTotalSnow, 0);
-    totalPrecip = totalRain + totalSnow;
 
     let chance = model.predict(
-      tensor2d([[maxTemp, minTemp, totalRain, totalSnow, totalPrecip]])
+      tensor2d([[maxTemp, minTemp, totalRain, totalSnow]])
     ).dataSync()[0];
 
     if(!isFinite(chance)) {
