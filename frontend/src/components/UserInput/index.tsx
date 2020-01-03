@@ -55,12 +55,15 @@ const StyledUserInput = styled.div`
   }
 
   .input-submit {
-    background-color: #56a3a6 !important;
-    border-color: #56a3a6 !important;
-    color: #ccdbdc !important;
+    background-color: #ffffff !important;
+    border-color: #ffffff !important;
+    color: #000000 !important;
     font-size: 2rem !important;
     border-bottom-right-radius: 0.25rem !important;
     border-top-right-radius: 0.25rem !important;
+    font-family: "Source Sans Pro" !important;
+    font-weight: 600 !important;
+    opacity: 1 !important;
 
     :hover {
       background-color: #60acb0 !important;
@@ -76,6 +79,9 @@ const StyledUserInput = styled.div`
     font-size: 2rem !important;
     font-weight: 600 !important;
     font-family: "Source Sans Pro" !important;
+    background-color: #ffffffb3;
+    opacity: 1;
+    color: #000000ff !important;
   }
 
   .invalid-feedback {

@@ -23,6 +23,7 @@ const mapStateToProps = (props: GlobalState) => ({
 // Move to bottom left corner of screen, with a small margin
 const StyledFooter = styled.div`
   color: #ccdbdc;
+  opacity: 0.5;
   position: absolute;
   left: 0px;
   bottom: 0px;

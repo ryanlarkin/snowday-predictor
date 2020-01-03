@@ -67,7 +67,8 @@ const StyledResults = styled.div`
   }
 
   .badge {
-    background-color: #ccdbdc;
+    background-color: #ffffff;
+    opacity: 0.7;
     color: #012a36;
     font-size: 6rem;
     display: flex;

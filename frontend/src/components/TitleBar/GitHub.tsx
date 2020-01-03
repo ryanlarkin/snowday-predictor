@@ -15,8 +15,9 @@ const StyledButton = styled(OutboundLink)`
   font-size: 3rem !important;
   font-weight: 400;
   background-color: #012a3600 !important;
-  border-color: #012a36 !important;
-  color: #ccdbdc !important;
+  border-color: #012a3600 !important;
+  color: #ffffff !important;
+  opacity: 0.5;
 
   svg:not(:root).svg-inline--fa {
     overflow: visible;

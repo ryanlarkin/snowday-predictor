@@ -33,6 +33,7 @@ const BgImage = styled(Image)`
   width: 100% !important;
   z-index: -1;
   height: 100vh !important;
+  user-select: none;
 
   & > img {
     object-fit: cover !important;

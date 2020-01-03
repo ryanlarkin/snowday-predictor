@@ -18,7 +18,8 @@ const TitleStyles = styled(Navbar)`
     font-family: "Lobster", cursive;
     font-weight: 400;
     font-size: 5rem;
-    color: #ccdbdc !important;
+    color: #ffffff !important;
+    opacity: 0.8;
   }
 `
 /**
