@@ -55,22 +55,24 @@ const mapStateToProps = (props: GlobalState) => ({
 })
 
 // Centre component, and set colours/sizing
-const StyledResults = styled.div`
+const StyledResults = styled.span`
   display: flex;
   justify-content: center;
 
   p {
+    width: 50%;
     text-align: center;
     color: #ccdbdc;
     font-size: 3rem;
     margin-bottom: 0px;
+    line-height: 92.7%;
   }
 
   .badge {
     background-color: #ffffff;
     opacity: 0.7;
     color: #012a36;
-    font-size: 6rem;
+    font-size: 4.5rem;
     display: flex;
     justify-content: center;
     box-shadow: 0px 0.25rem 0.25rem rgba(0, 0, 0, 0.25);
@@ -105,20 +107,18 @@ export default connect(mapStateToProps)(
       <></>
     ) : (
       <StyledResults>
-        <div>
-          <p>
-            {t("dateFormat", {
-              date: date.getUTCDate(),
-              weekday: t("day", { context: date.getUTCDay().toString() }),
-              month: t("month", { context: date.getUTCMonth().toString() }),
-            })}
-          </p>
-          <Badge variant="primary">
-            {t("result", {
-              chance: getPercent(chance * 100, t),
-            })}
-          </Badge>
-        </div>
+        <p>
+          {t("dateFormat", {
+            date: date.getUTCDate(),
+            weekday: t("day", { context: date.getUTCDay().toString() }),
+            month: t("month", { context: date.getUTCMonth().toString() }),
+          })}
+        </p>
+        <Badge variant="primary">
+          {t("result", {
+            chance: getPercent(chance * 100, t),
+          })}
+        </Badge>
       </StyledResults>
     )
 )

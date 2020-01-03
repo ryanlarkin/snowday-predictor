@@ -49,6 +49,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 
 // Sizing and colours, make text input expand rather than submit button
 const StyledUserInput = styled.div`
+  margin-left: 1rem;
+  margin-right: 1rem;
+
   .input-label {
     font-size: 2.4rem;
     color: #ccdbdc !important;
@@ -103,10 +106,13 @@ const StyledUserInput = styled.div`
     box-shadow: 0px 0.25rem 0.25rem rgba(0, 0, 0, 0.25);
   }
 
-  input-group {
+  .input-group {
     margin-left: 0px;
     margin-right: 0px;
   }
+
+  margin-top: 10rem;
+  margin-bottom: 7rem;
 `
 
 /**
@@ -138,7 +144,7 @@ export default connect(
       }) => (
         <Form className="form" noValidate onSubmit={handleSubmit}>
           <Form.Row>
-            <Form.Group as={Col} md="5" controlId="postalCodeValidation">
+            <Form.Group as={Col} md="9" controlId="postalCodeValidation">
               <Form.Label className="input-label">{t("inputLabel")}</Form.Label>
               <InputGroup className="row">
                 <Form.Control

@@ -12,6 +12,7 @@ import { OutboundLink } from "../OutboundLink"
 // Set sizing and colours, also set SVG CSS so it doesn't need to be changed later
 const StyledButton = styled(OutboundLink)`
   margin: 2.5rem;
+  margin-top: 0rem;
   font-size: 3rem !important;
   font-weight: 400;
   background-color: #012a3600 !important;

@@ -24,13 +24,12 @@ const mapStateToProps = (props: GlobalState) => ({
 const StyledLoading = styled.div`
   .unhide {
     transition: visibility 0.2s linear, opacity 0.2s linear;
-    visibility: visible;
     opacity: 1;
   }
 
   .hide {
     transition: visibility 0.2s linear, opacity 0.2s linear;
-    visibility: hidden;
+    display: none;
     opacity: 0;
   }
 `

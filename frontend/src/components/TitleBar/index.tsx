@@ -6,21 +6,15 @@ import React from "react"
 import { connect } from "react-redux"
 import styled from "styled-components"
 
-import { Navbar, Nav } from "react-bootstrap"
-import GitHub from "./GitHub"
-
 // Set sizing and fonts for navbar
-const TitleStyles = styled(Navbar)`
+const TitleStyles = styled.span`
   background: #012a3600;
-  padding-bottom: 5rem !important;
-
-  .page-title {
-    font-family: "Lobster", cursive;
-    font-weight: 400;
-    font-size: 5rem;
-    color: #ffffff !important;
-    opacity: 0.8;
-  }
+  padding-bottom: 10rem !important;
+  font-family: "Lobster", cursive;
+  font-weight: 400;
+  font-size: 3.5rem;
+  color: #ffffff !important;
+  opacity: 0.8;
 `
 /**
  * Type declaration for component props
@@ -40,13 +34,5 @@ const mapStateToProps = (props: GlobalState) => ({
  * Component for navbar at top of screen, with title and GitHub link
  */
 export default connect(mapStateToProps)(({ t }: ConnectedTitleBar) => (
-  <TitleStyles>
-    <Navbar.Brand className="page-title">{t("pageTitle")}</Navbar.Brand>
-    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-    <Navbar.Collapse id="responsive-navbar-nav">
-      <Nav className="ml-auto">
-        <GitHub />
-      </Nav>
-    </Navbar.Collapse>
-  </TitleStyles>
+  <TitleStyles>{t("pageTitle")}</TitleStyles>
 ))

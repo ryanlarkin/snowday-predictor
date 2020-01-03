@@ -1,13 +1,10 @@
 import React from "react"
-import TitleBar from "../TitleBar"
-import UserInput from "../UserInput"
-import Loading from "../Loading"
-import Results from "../Results"
 import styled from "styled-components"
 import "bootstrap/dist/css/bootstrap.min.css"
 import ErrorNotification from "../ErrorNotification"
-import Footer from "../Footer"
 import Image from "gatsby-image"
+import Right from "./Right"
+import Left from "./Left"
 
 // Apply background colour to entire screen
 const AppStyles = styled.div`
@@ -19,6 +16,30 @@ const AppStyles = styled.div`
   background: #012a36;
   font-family: "Source Sans Pro";
   font-weight: 600;
+
+  .left,
+  .right {
+    float: left;
+    width: 50%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .left:after {
+    content: "";
+    background-color: #000;
+    position: absolute;
+    top: 15vh;
+    left: 50%;
+    display: block;
+    width: 0px;
+    height: 70vh;
+
+    border: 1px solid #ffffff;
+  }
 
   .layer {
     background-color: #012a36;
@@ -54,11 +75,8 @@ export default ({ data }: AppProps) => (
     <div className="layer">
       <BgImage fixed={data.file.childImageSharp.fixed} />
     </div>
-    <TitleBar />
-    <UserInput />
-    <Loading />
-    <Results />
+    <Left />
+    <Right />
     <ErrorNotification />
-    <Footer />
   </AppStyles>
 )
