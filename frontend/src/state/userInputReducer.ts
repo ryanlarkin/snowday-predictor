@@ -18,6 +18,16 @@ const httpLink = createHttpLink({
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: httpLink,
+  defaultOptions: {
+    watchQuery: {
+      fetchPolicy: "no-cache",
+      errorPolicy: "ignore",
+    },
+    query: {
+      fetchPolicy: "no-cache",
+      errorPolicy: "all",
+    },
+  },
 })
 
 // Query to send for request

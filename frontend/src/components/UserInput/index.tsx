@@ -80,11 +80,16 @@ const StyledUserInput = styled.div`
 
   .form-control {
     font-size: 2rem !important;
-    font-weight: 600 !important;
     font-family: "Source Sans Pro" !important;
+    font-weight: 600 !important;
     background-color: #ffffffb3;
     opacity: 1;
     color: #000000ff !important;
+    padding-right: calc(1.5em + 0.75rem);
+
+    :focus {
+      background-color: #ffffff;
+    }
   }
 
   .invalid-feedback {
@@ -94,11 +99,17 @@ const StyledUserInput = styled.div`
 
   button[disabled] {
     pointer-events: none;
+    opacity: 0.8 !important;
   }
 
-  .is-valid ~ .invalid-feedback {
+  .invalid-feedback {
     display: block;
     visibility: hidden;
+  }
+
+  .is-invalid ~ .invalid-feedback {
+    visibility: visible;
+    display: block;
   }
 
   .input-group-append,
