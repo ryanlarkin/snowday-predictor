@@ -38,7 +38,7 @@ module.exports = {
         fonts: [
           {
             family: `Source Sans Pro`,
-            variants: ["600"],
+            variants: ["400", "600", "900"],
           },
           {
             family: `Lobster`,

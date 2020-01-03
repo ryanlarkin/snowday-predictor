@@ -16,6 +16,7 @@ const TitleStyles = styled(Navbar)`
 
   .page-title {
     font-family: "Lobster", cursive;
+    font-weight: 400;
     font-size: 5rem;
     color: #ccdbdc !important;
   }

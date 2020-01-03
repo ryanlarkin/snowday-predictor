@@ -16,6 +16,8 @@ const AppStyles = styled.div`
   right: 0;
   bottom: 0;
   background: #012a36;
+  font-family: "Source Sans Pro";
+  font-weight: 600;
 `
 
 /**

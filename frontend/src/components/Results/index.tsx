@@ -72,6 +72,7 @@ const StyledResults = styled.div`
     font-size: 6rem;
     display: flex;
     justify-content: center;
+    box-shadow: 0px 0.25rem 0.25rem rgba(0, 0, 0, 0.25);
   }
 `
 

@@ -4,7 +4,7 @@ import { GlobalState } from "../../types/types"
 
 import React from "react"
 import { connect } from "react-redux"
-import { Form, Button, Col } from "react-bootstrap"
+import { Form, Button, Col, InputGroup } from "react-bootstrap"
 import { Formik } from "formik"
 import { string, object } from "yup"
 import styled from "styled-components"
@@ -49,14 +49,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 
 // Sizing and colours, make text input expand rather than submit button
 const StyledUserInput = styled.div`
-  input[name="postalCode"] {
-    flex-grow: 1;
-  }
-
-  .submit-col {
-    flex-grow: 0;
-  }
-
   .input-label {
     font-size: 2.4rem;
     color: #ccdbdc !important;
@@ -66,6 +58,9 @@ const StyledUserInput = styled.div`
     background-color: #56a3a6 !important;
     border-color: #56a3a6 !important;
     color: #ccdbdc !important;
+    font-size: 2rem !important;
+    border-bottom-right-radius: 0.25rem !important;
+    border-top-right-radius: 0.25rem !important;
 
     :hover {
       background-color: #60acb0 !important;
@@ -79,18 +74,27 @@ const StyledUserInput = styled.div`
 
   .form-control {
     font-size: 2rem !important;
-  }
-
-  .input-submit {
-    font-size: 2rem !important;
+    font-weight: 600 !important;
+    font-family: "Source Sans Pro" !important;
   }
 
   .invalid-feedback {
     font-size: 1.25rem;
+    color: #ffae00;
   }
 
-  .disabled {
-    cursor: pointer;
+  button[disabled] {
+    pointer-events: none;
+  }
+
+  .is-valid ~ .invalid-feedback {
+    display: block;
+    visibility: hidden;
+  }
+
+  .input-group-append,
+  .form-control {
+    box-shadow: 0px 0.25rem 0.25rem rgba(0, 0, 0, 0.25);
   }
 `
 
@@ -125,30 +129,24 @@ export default connect(
           <Form.Row>
             <Form.Group as={Col} md="5" controlId="postalCodeValidation">
               <Form.Label className="input-label">{t("inputLabel")}</Form.Label>
-              <Form.Row className="input-row">
-                <Col>
-                  <Form.Control
-                    type="text"
-                    name="postalCode"
-                    placeholder={t("inputPlaceholder")}
-                    value={values.postalCode}
-                    onChange={handleChange}
-                    isValid={touched.postalCode && !errors.postalCode}
-                    isInvalid={touched.postalCode && !!errors.postalCode}
-                    onBlur={handleBlur}
-                    onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-                      // Give feedback when user presses enter
-                      if (e.key === "Enter") {
-                        setTouched({ postalCode: true })
-                      }
-                    }}
-                  />
-                  {/* Tell the user what they did wrong when the form has errors */}
-                  <Form.Control.Feedback type="invalid">
-                    {t("inputInvalid")}
-                  </Form.Control.Feedback>
-                </Col>
-                <Col className="submit-col">
+              <InputGroup className="row">
+                <Form.Control
+                  type="text"
+                  name="postalCode"
+                  placeholder={t("inputPlaceholder")}
+                  value={values.postalCode}
+                  onChange={handleChange}
+                  isValid={touched.postalCode && !errors.postalCode}
+                  isInvalid={touched.postalCode && !!errors.postalCode}
+                  onBlur={handleBlur}
+                  onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                    // Give feedback when user presses enter
+                    if (e.key === "Enter") {
+                      setTouched({ postalCode: true })
+                    }
+                  }}
+                />
+                <InputGroup.Append>
                   <Button
                     className="input-submit"
                     disabled={!isValid || !values.postalCode}
@@ -156,8 +154,12 @@ export default connect(
                   >
                     {t("submitButton")}
                   </Button>
-                </Col>
-              </Form.Row>
+                </InputGroup.Append>
+                {/* Tell the user what they did wrong when the form has errors */}
+                <Form.Control.Feedback type="invalid">
+                  {t("inputInvalid")}
+                </Form.Control.Feedback>
+              </InputGroup>
             </Form.Group>
           </Form.Row>
         </Form>
