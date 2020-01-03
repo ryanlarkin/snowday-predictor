@@ -36,5 +36,6 @@
   "month_11": "December",
   "authors": "Ryan Larkin & Dmitry Tsarapkine",
   "negligible": "<1",
-  "almostCertain": ">99"
+  "almostCertain": ">99",
+  "siteDescription": "Calculates the chance of a snowday using artificial intelligence."
 }
