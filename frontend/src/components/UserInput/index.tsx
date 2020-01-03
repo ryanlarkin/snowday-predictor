@@ -96,6 +96,11 @@ const StyledUserInput = styled.div`
   .form-control {
     box-shadow: 0px 0.25rem 0.25rem rgba(0, 0, 0, 0.25);
   }
+
+  input-group {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
 `
 
 /**

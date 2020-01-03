@@ -44,19 +44,30 @@ export default withI18next({ ns: "common" })(
     setLang(t, i18n, tReady)
 
     return (
-      <>
-        <StaticQuery
-          query={graphql`
-            {
-              gitCommit(latest: { eq: true }) {
-                hash
+      <StaticQuery
+        query={graphql`
+          {
+            gitCommit(latest: { eq: true }) {
+              hash
+            }
+            file(relativePath: { eq: "background.jpg" }) {
+              childImageSharp {
+                # Specify the image processing specifications right in the query.
+                # Makes it trivial to update as your page's design changes.
+                fixed(width: 4576, height: 2904) {
+                  ...GatsbyImageSharpFixed
+                }
               }
             }
-          `}
-          render={data => <Header queryData={data} />}
-        />
-        <App />
-      </>
+          }
+        `}
+        render={data => (
+          <>
+            <Header queryData={data} />
+            <App data={data} />
+          </>
+        )}
+      />
     )
   })
 )

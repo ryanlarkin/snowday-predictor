@@ -11,7 +11,7 @@ import GitHub from "./GitHub"
 
 // Set sizing and fonts for navbar
 const TitleStyles = styled(Navbar)`
-  background: #012a36;
+  background: #012a3600;
   padding-bottom: 5rem !important;
 
   .page-title {

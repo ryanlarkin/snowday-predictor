@@ -14,7 +14,7 @@ const StyledButton = styled(OutboundLink)`
   margin: 2.5rem;
   font-size: 3rem !important;
   font-weight: 400;
-  background-color: #012a36 !important;
+  background-color: #012a3600 !important;
   border-color: #012a36 !important;
   color: #ccdbdc !important;
 
