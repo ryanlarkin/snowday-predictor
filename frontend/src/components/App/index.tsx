@@ -9,20 +9,21 @@ import Left from "./Left"
 // Apply background colour to entire screen
 const AppStyles = styled.div`
   position: fixed;
-  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background: #012a36;
   font-family: "Source Sans Pro";
   font-weight: 600;
+  overflow-y: hidden;
+  min-height: 100%;
 
   .left,
   .right {
     float: left;
     @media (max-width: 768px) {
       width: 100%;
-      height: 50%;
+      height: auto;
     }
 
     width: 50%;
@@ -48,6 +49,10 @@ const AppStyles = styled.div`
       height: 0px;
       position: relative;
       left: 0%;
+      display: flex;
+      flex-direction: column;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
     }
 
     border: 1px solid #ffffff;
