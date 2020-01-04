@@ -44,10 +44,10 @@ const AppStyles = styled.div`
     height: 70%;
 
     @media (max-width: 768px) {
-      width: 70vw;
-      height: 0vh;
-      top: 50%;
-      left: 15vw;
+      width: 70%;
+      height: 0px;
+      position: relative;
+      left: 0%;
     }
 
     border: 1px solid #ffffff;

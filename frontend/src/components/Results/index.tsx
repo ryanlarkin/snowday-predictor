@@ -63,7 +63,7 @@ const StyledResults = styled.span`
     width: 50%;
     text-align: center;
     color: #ccdbdc;
-    font-size: 3rem;
+    font-size: 2.4rem;
     margin-bottom: 0px;
     line-height: 92.7%;
   }
@@ -72,7 +72,7 @@ const StyledResults = styled.span`
     background-color: #ffffff;
     opacity: 0.7;
     color: #012a36;
-    font-size: 4.5rem;
+    font-size: 3.2rem;
     display: flex;
     justify-content: center;
     box-shadow: 0px 0.25rem 0.25rem rgba(0, 0, 0, 0.25);

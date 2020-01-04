@@ -53,7 +53,7 @@ const StyledUserInput = styled.div`
   margin-right: 1rem;
 
   .input-label {
-    font-size: 2.4rem;
+    font-size: 1.8rem;
     color: #ccdbdc !important;
   }
 
@@ -61,7 +61,7 @@ const StyledUserInput = styled.div`
     background-color: #ffffff !important;
     border-color: #ffffff !important;
     color: #000000 !important;
-    font-size: 2rem !important;
+    font-size: 1.5rem !important;
     border-bottom-right-radius: 0.25rem !important;
     border-top-right-radius: 0.25rem !important;
     font-family: "Source Sans Pro" !important;
@@ -79,7 +79,7 @@ const StyledUserInput = styled.div`
   }
 
   .form-control {
-    font-size: 2rem !important;
+    font-size: 1.5rem !important;
     font-family: "Source Sans Pro" !important;
     font-weight: 600 !important;
     background-color: #ffffffb3;

@@ -9,6 +9,11 @@ import styled from "styled-components"
 // Set sizing and fonts for navbar
 const TitleStyles = styled.span`
   background: #012a3600;
+
+  @media (max-width: 768px) {
+    padding-bottom: 1rem !important;
+  }
+
   padding-bottom: 10rem !important;
   font-family: "Lobster", cursive;
   font-weight: 400;
