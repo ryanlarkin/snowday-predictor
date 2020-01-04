@@ -10,7 +10,10 @@ import styled from "styled-components"
 const TitleStyles = styled.span`
   background: #012a3600;
 
+  margin-top: 40vh;
+
   @media (max-width: 768px) {
+    margin-top: 0%;
     padding-bottom: 1rem !important;
   }
 
