@@ -20,6 +20,11 @@ const AppStyles = styled.div`
   .left,
   .right {
     float: left;
+    @media (max-aspect-ratio: 1/1) {
+      width: 100%;
+      height: 50%;
+    }
+
     width: 50%;
     height: 100%;
 
@@ -37,6 +42,13 @@ const AppStyles = styled.div`
     display: block;
     width: 0px;
     height: 70vh;
+
+    @media (max-aspect-ratio: 1/1) {
+      width: 70vw;
+      height: 0vh;
+      top: 50%;
+      left: 15vw;
+    }
 
     border: 1px solid #ffffff;
   }

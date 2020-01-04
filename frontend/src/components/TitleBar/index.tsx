@@ -15,6 +15,7 @@ const TitleStyles = styled.span`
   font-size: 3.5rem;
   color: #ffffff !important;
   opacity: 0.8;
+  text-align: center;
 `
 /**
  * Type declaration for component props

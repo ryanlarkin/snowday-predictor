@@ -124,6 +124,11 @@ const StyledUserInput = styled.div`
 
   margin-top: 10rem;
   margin-bottom: 7rem;
+
+  @media (max-aspect-ratio: 1/1) {
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+  }
 `
 
 /**
@@ -155,7 +160,7 @@ export default connect(
       }) => (
         <Form className="form" noValidate onSubmit={handleSubmit}>
           <Form.Row>
-            <Form.Group as={Col} md="9" controlId="postalCodeValidation">
+            <Form.Group as={Col} controlId="postalCodeValidation">
               <Form.Label className="input-label">{t("inputLabel")}</Form.Label>
               <InputGroup className="row">
                 <Form.Control
