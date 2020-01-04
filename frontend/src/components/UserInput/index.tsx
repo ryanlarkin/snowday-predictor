@@ -125,7 +125,7 @@ const StyledUserInput = styled.div`
   margin-top: 10rem;
   margin-bottom: 7rem;
 
-  @media (max-aspect-ratio: 1/1), (max-device-width: 768px) {
+  @media (max-width: 768px) {
     margin-top: 0rem;
     margin-bottom: 0rem;
   }

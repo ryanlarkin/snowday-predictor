@@ -20,7 +20,7 @@ const AppStyles = styled.div`
   .left,
   .right {
     float: left;
-    @media (max-aspect-ratio: 1/1) {
+    @media (max-width: 768px) {
       width: 100%;
       height: 50%;
     }
@@ -43,7 +43,7 @@ const AppStyles = styled.div`
     width: 0px;
     height: 70vh;
 
-    @media (max-aspect-ratio: 1/1) {
+    @media (max-width: 768px) {
       width: 70vw;
       height: 0vh;
       top: 50%;
