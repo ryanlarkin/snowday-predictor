@@ -37,11 +37,11 @@ const AppStyles = styled.div`
     content: "";
     background-color: #000;
     position: absolute;
-    top: 15vh;
+    top: 15%;
     left: 50%;
     display: block;
     width: 0px;
-    height: 70vh;
+    height: 70%;
 
     @media (max-width: 768px) {
       width: 70vw;
@@ -65,7 +65,7 @@ const BgImage = styled(Image)`
   left: 0;
   width: 100% !important;
   z-index: -1;
-  height: 100vh !important;
+  height: 100% !important;
   user-select: none;
 
   & > img {
