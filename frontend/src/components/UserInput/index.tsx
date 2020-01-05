@@ -122,7 +122,7 @@ const StyledUserInput = styled.div`
     margin-right: 0px;
   }
 
-  margin-top: 30vh;
+  margin-top: 40vh;
   margin-bottom: 7rem;
 
   @media (max-width: 768px) {

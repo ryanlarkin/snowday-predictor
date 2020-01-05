@@ -6,6 +6,8 @@ import Image from "gatsby-image"
 import Right from "./Right"
 import Left from "./Left"
 
+const ContainerStyles = styled.div``
+
 // Apply background colour to entire screen
 const AppStyles = styled.div`
   position: fixed;
@@ -15,8 +17,9 @@ const AppStyles = styled.div`
   background: #012a36;
   font-family: "Source Sans Pro";
   font-weight: 600;
-  overflow-y: hidden;
-  min-height: 100%;
+  overflow: auto;
+  height: 100%;
+  background-color: #012a36b3;
 
   .left,
   .right {
@@ -57,11 +60,6 @@ const AppStyles = styled.div`
 
     border: 1px solid #ffffff;
   }
-
-  .layer {
-    background-color: #012a36;
-    opacity: 0.3;
-  }
 `
 
 const BgImage = styled(Image)`
@@ -72,6 +70,8 @@ const BgImage = styled(Image)`
   z-index: -1;
   height: 100% !important;
   user-select: none;
+
+  min-height: 100%;
 
   & > img {
     object-fit: cover !important;
@@ -88,12 +88,12 @@ type AppProps = {
  * Base component that renders all other components of the website
  */
 export default ({ data }: AppProps) => (
-  <AppStyles>
-    <div className="layer">
-      <BgImage fixed={data.file.childImageSharp.fixed} />
-    </div>
-    <Left />
-    <Right />
-    <ErrorNotification />
-  </AppStyles>
+  <ContainerStyles>
+    <BgImage fixed={data.file.childImageSharp.fixed} />
+    <AppStyles>
+      <Left />
+      <Right />
+      <ErrorNotification />
+    </AppStyles>
+  </ContainerStyles>
 )

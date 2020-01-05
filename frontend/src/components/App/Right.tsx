@@ -4,15 +4,10 @@ import Loading from "../Loading"
 import Results from "../Results"
 import styled from "styled-components"
 
-const StyledRight = styled.div`
-  .spacer {
-    height: 20%;
-  }
-`
+const StyledRight = styled.div``
 
 export default () => (
   <StyledRight className="right">
-    <div className="spacer" />
     <UserInput />
     <Loading />
     <Results />

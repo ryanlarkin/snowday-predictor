@@ -3,15 +3,10 @@ import TitleBar from "../TitleBar"
 import Footer from "../Footer"
 import styled from "styled-components"
 
-const StyledLeft = styled.div`
-  .spacer {
-    height: 40%;
-  }
-`
+const StyledLeft = styled.div``
 
 export default () => (
   <StyledLeft className="left">
-    <div className="spacer" />
     <TitleBar />
     <Footer />
   </StyledLeft>
