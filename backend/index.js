@@ -2,7 +2,7 @@
 const { ApolloServer, gql } = require("apollo-server-lambda");
 const { GraphQLDate } = require("graphql-iso-date");
 const tf = require("@tensorflow/tfjs-layers");
-const { tensor2d } = require("@tensorflow/tfjs-core")
+const { tensor2d } = require("@tensorflow/tfjs-core");
 const { Response } = require("node-fetch");
 const fetch = require("node-fetch");
 const fs = require("fs");
@@ -80,9 +80,7 @@ function getTotalSnow(totalSnow, weather) {
 
 const read = path =>
   new Promise((resolve, reject) =>
-    fs.readFile(path, (err, data) =>
-      err ? reject(err) : resolve(data)
-    )
+    fs.readFile(path, (err, data) => (err ? reject(err) : resolve(data)))
   );
 
 let model;
@@ -134,6 +132,23 @@ const prediction = async (parent, args, context, info) => {
 
     apiData = await fetch(apiURL, settings).then(res => res.json());
 
+    // Determines whether there is an issue with the postal/zip code
+    if (apiData.cod === "404") {
+      if (countryCode === "CA") {
+        return {
+          error: {
+            id: "invalidPostalCode"
+          }
+        }
+      } else {
+        return {
+          error: {
+            id: "invalidZipCode"
+          }
+        }
+      }
+    }
+
     // Adjusts time based on timezone relative to UTC
     today.setSeconds(today.getSeconds() + apiData.city.timezone);
 
@@ -155,11 +170,11 @@ const prediction = async (parent, args, context, info) => {
     totalRain = nextDayData.reduce(getTotalRain, 0);
     totalSnow = nextDayData.reduce(getTotalSnow, 0);
 
-    let chance = model.predict(
-      tensor2d([[maxTemp, minTemp, totalRain, totalSnow]])
-    ).dataSync()[0];
+    let chance = model
+      .predict(tensor2d([[maxTemp, minTemp, totalRain, totalSnow]]))
+      .dataSync()[0];
 
-    if(!isFinite(chance)) {
+    if (!isFinite(chance)) {
       chance = 0.0;
     }
 
@@ -168,13 +183,13 @@ const prediction = async (parent, args, context, info) => {
         chance,
         location: {
           code: {
-            codeValue: args.code.replace(/\s/g,'').toUpperCase(),
+            codeValue: args.code.replace(/\s/g, "").toUpperCase(),
             type: countryCode === "CA" ? "POSTAL" : "ZIP"
           }
         },
         date: today
       }
-    };
+    }; 
   } catch (e) {
     console.error(e);
     return {
