@@ -46,6 +46,7 @@ const query = gql`
       }
       error {
         id
+        values
       }
     }
   }
@@ -137,6 +138,7 @@ export default (
               type: "SET_ERROR",
               error: {
                 errorKey: error.id,
+                errorValues: error.values
               } as ErrorType,
             })
           }

@@ -58,6 +58,7 @@ export const ApiResponse = type.type({
         type.null,
         type.type({
           id: type.string,
+          values: type.array(type.string)
         }),
       ]),
     }),

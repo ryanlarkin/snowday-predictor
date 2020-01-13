@@ -42,6 +42,7 @@ const typeDefs = gql`
 
   type Error {
     id: ID!
+    values: [String!]!
   }
 
   # The "Query" type is special: it lists all of the available queries that
@@ -137,13 +138,15 @@ const prediction = async (parent, args, context, info) => {
       if (countryCode === "CA") {
         return {
           error: {
-            id: "invalidPostalCode"
+            id: "invalidPostalCode",
+            values: [args.code.replace(/\s/g, "").toUpperCase()]
           }
         }
       } else {
         return {
           error: {
-            id: "invalidZipCode"
+            id: "invalidZipCode",
+            values: [args.code.replace(/\s/g, "").toUpperCase()]
           }
         }
       }
@@ -194,7 +197,8 @@ const prediction = async (parent, args, context, info) => {
     console.error(e);
     return {
       error: {
-        id: "internalError"
+        id: "internalError",
+        values: []
       }
     };
   }
